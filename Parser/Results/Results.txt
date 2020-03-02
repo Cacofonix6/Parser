@@ -1,0 +1,25 @@
+NPROG  Polytest      NGLOB  NINIT  MAX_POINTS    NILIT  20     NTYPEL 
+NRTYPE point  NFLIST NSDECL x      NSDECL y      NATYPE points NSIMV  
+MAX_POINTS    NARRD  myPoints      NFUNCS NFUND  inputPoints   NDLIST 
+NSDECL xIn    NDLIST NSDECL yIn    NSDECL iter   NSTATS NASGN  NSIMV  
+iter   NILIT  0      NPLEQ  NSIMV  iter   NLSS   NSIMV  iter   NSIMV  
+iter   NSTATS NINPUT NVLIST NSIMV  xIn    NSIMV  yIn    NSTATS NASGN  
+NARRV  myPoints      NSIMV  iter   NSIMV  xIn    NASGN  NARRV  myPoints      
+NSIMV  iter   NSIMV  yIn    NFUND  calcArea      NPLIST NARRP  allPoints     
+NSIMP  count  NDLIST NSDECL area   NDLIST NSDECL tempX  NDLIST NSDECL 
+tempY  NSDECL iter   NSTATS NASGN  NSIMV  iter   NILIT  0      NSTATS 
+NASGN  NSIMV  area   NILIT  0      NSTATS NIFTH  NGRT   NSIMV  count  
+NILIT  2      NPLEQ  NSIMV  iter   NLEQ   NSIMV  iter   NSUB   NSIMV  
+count  NILIT  2      NSTATS NASGN  NSIMV  tempX  NADD   NARRV  allPoints     
+NADD   NSIMV  iter   NILIT  1      NARRV  allPoints     NSIMV  iter   
+NSTATS NASGN  NSIMV  tempY  NSUB   NARRV  allPoints     NADD   NSIMV  
+iter   NILIT  1      NARRV  allPoints     NSIMV  iter   NPLEQ  NSIMV  
+area   NMUL   NSIMV  tempX  NSIMV  tempY  NSTATS NPLEQ  NSIMV  iter   
+NASGN  NSIMV  area   NILIT  0      NEQL   NSIMV  iter   NILIT  5      
+NSTATS NIFTH  NLSS   NSIMV  area   NILIT  0      NSTEQ  NSIMV  area   
+NILIT  -1     NRETN  NMUL   NSIMV  area   NFLIT  0.5    NMAIN  NSDLST 
+NSDECL pointCount    NSDECL polyArea      NSTATS NINPUT NSIMV  pointCount    
+NIFTE  NGRT   NSIMV  pointCount    NSIMV  MAX_POINTS    NPRLN  NSTRG  
+Too many points      NSTATS NCALL  inputPoints   NSIMV  pointCount    
+NSTATS NASGN  NSIMV  polyArea      NFCALL calcArea      NSIMV  myPoints      
+NPRLN  NSIMV  polyArea      

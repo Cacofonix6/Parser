@@ -1,0 +1,117 @@
+NPROG	<program> 		::= CD19 <id> <globals> <funcs> <mainbody>
+NGLOB	<globals> 		::= <consts> <types> <arrays> 
+		<consts> 		::= constants <initlist> | ε
+NILIST	<initlist> 		::= <init> <initlisttail>
+		<initlisttail> 	::= , <initlist> | ε
+NINIT	<init> 			::= <id> = <expr>
+		<types> 		::= types <typelist> | ε
+		<arrays> 		::= arrays <arrdecls> | ε
+NFUNCS	<funcs> 		::= <func> <funcs> | ε
+NMAIN	<mainbody> 		::= main <slist> begin <stats> end CD19 <id>
+NSDLST	<slist> 		::= <sdecl> <slisttail> 
+		<slisttail> 	::= , <slist> | ε
+NTYPEL	<typelist> 		::= <type> <typelisttail> 
+		<typelisttail> 	::= <typelist> | ε
+		<type> 			::= <id> is <typedecide>
+NRTYPE	<typedecide>	::= <fields> end 
+NATYPE	<typedecide>	::= array [ <expr> ] of <id>
+NFLIST	<fields> 		::= <sdecl> <fieldstail>
+		<fieldstail> 	::= , <fields> | ε
+NSDECL	<sdecl> 		::= <id> : <stype>
+NALIST	<arrdecls> 		::= <arrdecl> <arrdeclstail> 
+		<arrdeclstail> 	::= , <arrdecls> | ε
+NARRD	<arrdecl> 		::= <id> : <id>
+NFUND	<func> 			::= function <id> ( <plist> ) : <rtype> <funcbody>
+		<rtype> 		::= <stype> | void
+		<plist> 		::= <params> | ε		
+NPLIST	<params> 		::= <param> <paramstail> 
+		<paramstail>	::= , <params> | ε
+NARRC	<param> 		::= const <arrdecl>
+		<param> 		::= <id> : <paramtype>
+NARRP	<paramtype>		::= <id>
+NSIMP	<paramtype>		::= <stype>
+		<funcbody> 		::= <locals> begin <stats> end
+		<locals> 		::= <dlist> | ε
+NDLIST	<dlist> 		::= <decl> <dlisttail>
+		<dlisttail>		::= , <dlist> | ε
+		<decl> 			::= <id> : <decldecide>
+NSDECL	<decldecide>	::= <stype>
+NARRD	<decldecide>	::= <id>
+		<stype> 		::= integer | real | boolean
+NSTATS	<stats> 		::= <stat> ; <statstail> | <strstat> <statstail> 
+		<statstail>		::= <stats> | ε		
+		<strstat> 		::= <forstat> | <ifstat>
+		<stat> 			::= <repstat> | <iostat> | <returnstat> | <idstat>
+		<idstat>		::= <asgnstat> | <callstat>
+
+NFOR	<forstat> 		::= for ( <asgnlist> ; <bool> ) <stats> end
+NREPT	<repstat> 		::= repeat ( <asgnlist> ) <stats> until <bool>
+		<asgnlist> 		::= <alist> | ε
+NASGNS	<alist> 		::= <asgnstat> <alisttail>
+		<alisttail> 	::= , <alist> | ε
+		<ifstat> 		::= if ( <bool> ) <stats> <ifstattail>
+NIFTE	<ifstattail>	::= else <stats> end
+NIFTH	<ifstattail>	::= end
+
+		<asgnstat> 		::= <var> <asgnop> <bool>				
+NASGN 	<asgnop> 		::= = 
+NPLEQ	<asgnop> 		::= +=
+NMNEQ	<asgnop> 		::= -=
+NSTEQ	<asgnop> 		::= *=
+NDVEQ	<asgnop> 		::= /=
+NINPUT	<iostat> 		::= input <vlist>
+NPRINT	<iostat> 		::= print <prlist>
+NPRLN	<iostat> 		::= printline <prlist>
+NCALL	<callstat> 		::= <id> ( <callstattail> )
+		<callstattail>	::= <elist> | ε
+NRETN	<returnstat> 	::= return <returnstattail>
+		<returnstattail> ::= <expr> | ε
+NVLIST	<vlist> 		::= <var> <vlisttail>
+		<vlisttail>		::= , <vlist> | ε
+		<var> 			::= <id> <vartail>
+NARRV	<vartail> 		::= [ <expr> ] . <id>
+NSIMV	<vartail> 		::= ε
+NEXPL	<elist> 		::= <bool> <elisttail>
+		<elisttail>		::= , <elist> | ε
+NBOOL	<bool> 			::= <rel> <booltail>
+		<booltail> 		::= <logop> <rel> <booltail> | ε
+NNOT	<rel> 			::= not <expr> <relop> <expr>
+		<rel> 			::= <expr> <reltail>
+		<reltail>		::= <relop> <expr>
+		<reltail>		::= ε
+NAND	<logop> 		::= and
+NOR 	<logop> 		::= or
+NXOR	<logop> 		::= xor
+NEQL	<relop> 		::= == 
+NNEQ 	<relop> 		::= != 
+NGRT	<relop> 		::= > 
+NLEQ 	<relop> 		::= <=
+NLSS 	<relop> 		::= < 
+NGEQ 	<relop> 		::= >=
+		<expr> 			::= <fact> <exprtail>
+NADD 	<exprtail> 		::= + <fact> <exprtail>
+NSUB 	<exprtail> 		::= - <fact> <exprtail>
+	 	<exprtail> 		::= ε
+		<fact> 			::= <term> <facttail>
+NMUL 	<facttail> 		::= * <term> <facttail>
+NDIV 	<facttail> 		::= / <term> <facttail>
+NMOD 	<facttail> 		::= % <term> <facttail>
+	 	<facttail> 		::= ε
+		<term> 			::= <exponent> <termtail>
+NPOW 	<termtail> 		::= ^ <exponent> <termtail>
+		<termtail> 		::= ε
+NTRUE 	<exponent> 		::= true
+NFALS 	<exponent> 		::= false
+		<exponent> 		::= ( <bool> )
+NILIT 	<exponent> 		::= <intlit>
+NFLIT 	<exponent> 		::= <reallit>
+		<exponent> 		::= <fncall>
+		<exponent> 		::= <var>
+NFCALL 	<fncall> 		::= <id> ( <fncalltail> )
+		<fncalltail>	::= <elist> | ε
+
+NPRLST 	<prlist> 		::= <printitem> <prlisttail>
+		<prlisttail> 	::= , <prlist> | ε
+
+		<printitem> 	::= <expr>
+NSTRG 	<printitem> 	::= <string>

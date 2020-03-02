@@ -1,0 +1,83 @@
+CD19 Polytest
+
+constants 
+	MAX_POINTS = 20
+
+/-- declare the point struct and the points array
+types
+	point is
+		x : real,
+		y : real
+	end
+	points is array [MAX_POINTS] of point 
+	
+arrays
+	myPoints : points
+
+/-- populates the array of points
+function inputPoints() : void
+	xIn : real,
+	yIn : real,
+	iter : integer
+begin	
+	iter = 0;
+
+	for (iter += 1 ; iter < iter)
+		input xIn, yIn;
+
+		myPoints[iter].x = xIn;
+		myPoints[iter].y = yIn;	
+	end
+end
+
+/-- calculates the area of a given set of points
+function calcArea(allPoints : points, count : integer) : real
+	area : real,
+	tempX : real,
+	tempY : real,
+	iter : integer
+begin
+	iter = 0;
+	area = 0;
+
+	/-- if there are less than 2 points the area will remain 0
+	if(count > 2)
+		/-- formula for area of a polygon
+		for(iter += 1; iter <= count - 2)
+
+			tempX = allPoints[iter+1].x + allPoints[iter].x;
+			tempY = allPoints[iter+1].y - allPoints[iter].y;
+
+			area += tempX * tempY;
+
+		end	
+	end
+
+	repeat( iter += 1 ) 
+		area = 0;
+	until iter == 5;
+
+	/-- get absolute value
+	if(area < 0)
+		area *= -1;
+	end
+	return area * 0.5;
+
+end
+
+main
+	pointCount : integer,
+	polyArea : real
+begin
+	input pointCount;
+
+	/-- Check pointCount against the max
+	if(pointCount > MAX_POINTS)
+		printLine "Too many points";
+	else
+		inputPoints(pointCount);
+		polyArea = calcArea(myPoints);	
+		printline polyArea;
+	end
+end 
+CD19 Polytest

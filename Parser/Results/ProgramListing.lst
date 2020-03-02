@@ -1,0 +1,85 @@
+   1: CD19 Polytest
+   2: 
+   3: constants 
+   4: 	MAX_POINTS = 20
+   5: 
+   6: /-- declare the point struct and the points array
+   7: types
+   8: 	point is
+   9: 		x : real,
+  10: 		y : real
+  11: 	end
+  12: 	points is array [MAX_POINTS] of point 
+  13: 	
+  14: arrays
+  15: 	myPoints : points
+  16: 
+  17: /-- populates the array of points
+  18: function inputPoints() : void
+  19: 	xIn : real,
+  20: 	yIn : real,
+  21: 	iter : integer
+  22: begin	
+  23: 	iter = 0;
+  24: 
+  25: 	for (iter += 1 ; iter < iter)
+  26: 		input xIn, yIn;
+  27: 
+  28: 		myPoints[iter].x = xIn;
+  29: 		myPoints[iter].y = yIn;	
+  30: 	end
+  31: end
+  32: 
+  33: /-- calculates the area of a given set of points
+  34: function calcArea(allPoints : points, count : integer) : real
+  35: 	area : real,
+  36: 	tempX : real,
+  37: 	tempY : real,
+  38: 	iter : integer
+  39: begin
+  40: 	iter = 0;
+  41: 	area = 0;
+  42: 
+  43: 	/-- if there are less than 2 points the area will remain 0
+  44: 	if(count > 2)
+  45: 		/-- formula for area of a polygon
+  46: 		for(iter += 1; iter <= count - 2)
+  47: 
+  48: 			tempX = allPoints[iter+1].x + allPoints[iter].x;
+  49: 			tempY = allPoints[iter+1].y - allPoints[iter].y;
+  50: 
+  51: 			area += tempX * tempY;
+  52: 
+  53: 		end	
+  54: 	end
+  55: 
+  56: 	repeat( iter += 1 ) 
+  57: 		area = 0;
+  58: 	until iter == 5;
+  59: 
+  60: 	/-- get absolute value
+  61: 	if(area < 0)
+  62: 		area *= -1;
+  63: 	end
+  64: 	return area * 0.5;
+  65: 
+  66: end
+  67: 
+  68: main
+  69: 	pointCount : integer,
+  70: 	polyArea : real
+  71: begin
+  72: 	input pointCount;
+  73: 
+  74: 	/-- Check pointCount against the max
+  75: 	if(pointCount > MAX_POINTS)
+  76: 		printLine "Too many points";
+  77: 	else
+  78: 		inputPoints(pointCount);
+  79: 		polyArea = calcArea(myPoints);	
+  80: 		printline polyArea;
+  81: 	end
+  82: end 
+  83: CD19 Polytest
+
+
